@@ -23,12 +23,12 @@ app.use(express.json());
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
   }
-  var corsOptions = {
-    origin: 'https://shop-client-azure.vercel.app/',
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-  }
+  // var corsOptions = {
+  //   origin: 'https://shop-client-azure.vercel.app/',
+  //   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+  // }
 
-app.use(cors(corsOptions));
+app.use(cors());
 app.use('/api/auth',authRoutes)
 app.use('/api/user',userRoutes)
 app.use('/api/product',productRoutes)
@@ -36,13 +36,13 @@ app.use('/api/cart',cartRoutes)
 app.use('/api/order',orderRoutes)
 app.use('/api/checkout',stripeRoutes)
 
-app.use((req,res,next)=>{
-  res.setHeader("Access-Control-Allow-Origin", "*");
-res.setHeader("Access-Control-Allow-Credentials", "true");
-res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
-  next(); 
-})
+// app.use((req,res,next)=>{
+//   res.setHeader("Access-Control-Allow-Origin", "*");
+// res.setHeader("Access-Control-Allow-Credentials", "true");
+// res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+// res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+//   next(); 
+// })
 
 
 
@@ -53,9 +53,7 @@ app.all('*', (req, res, next) => {
   app.use(globalErrorHandler)
 
 
-app.get('/api/product',(req,res)=>{
-  res.send('hellooooo')
-})
+
 const DATABASE = process.env.DATABASE_URL.replace('<password>',process.env.DATABASE_PASSWORD);
 
 mongoose.connect(DATABASE).then(()=>{
