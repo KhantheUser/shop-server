@@ -18,38 +18,38 @@ dotenv.config(
 );
 
 const app = express();
-// app.use(express.static('public'));
-// app.use(express.json());
-// if (process.env.NODE_ENV === 'development') {
-//     app.use(morgan('dev'));
-//   }
+app.use(express.static('public'));
+app.use(express.json());
+if (process.env.NODE_ENV === 'development') {
+    app.use(morgan('dev'));
+  }
 
-// app.use(cors());
-// app.use('/api/auth',authRoutes)
-// app.use('/api/user',userRoutes)
-// app.use('/api/product',productRoutes)
-// app.use('/api/cart',cartRoutes)
-// app.use('/api/order',orderRoutes)
-// app.use('/api/checkout',stripeRoutes)
-
-
+app.use(cors());
+app.use('/api/auth',authRoutes)
+app.use('/api/user',userRoutes)
+app.use('/api/product',productRoutes)
+app.use('/api/cart',cartRoutes)
+app.use('/api/order',orderRoutes)
+app.use('/api/checkout',stripeRoutes)
 
 
-// app.all('*', (req, res, next) => {
+
+
+app.all('*', (req, res, next) => {
     
-//     next(new AppError(`Can not find ${req.originalUrl}`,404))
-//   })
-//   app.use(globalErrorHandler)
+    next(new AppError(`Can not find ${req.originalUrl}`,404))
+  })
+  app.use(globalErrorHandler)
 
 
 app.get('/api/product',(req,res)=>{
   res.send('hellooooo')
 })
-// const DATABASE = process.env.DATABASE_URL.replace('<password>',process.env.DATABASE_PASSWORD);
+const DATABASE = process.env.DATABASE_URL.replace('<password>',process.env.DATABASE_PASSWORD);
 
-// mongoose.connect(DATABASE).then(()=>{
-//     console.log('Connected to database');
-// }).catch(err => console(err));
+mongoose.connect(DATABASE).then(()=>{
+    console.log('Connected to database');
+}).catch(err => console(err));
 
 
 
