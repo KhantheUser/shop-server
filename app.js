@@ -45,11 +45,11 @@ const app = express();
 app.get('/api/product',(req,res)=>{
   res.send('hellooooo')
 })
-const DATABASE = process.env.DATABASE_URL.replace('<password>',process.env.DATABASE_PASSWORD);
+// const DATABASE = process.env.DATABASE_URL.replace('<password>',process.env.DATABASE_PASSWORD);
 
-mongoose.connect(DATABASE).then(()=>{
-    console.log('Connected to database');
-}).catch(err => console(err));
+// mongoose.connect(DATABASE).then(()=>{
+//     console.log('Connected to database');
+// }).catch(err => console(err));
 
 
 
