@@ -1,21 +1,21 @@
 const express = require('express');
-// const morgan = require('morgan');
-// const mongoose = require('mongoose');
-// const dotenv = require('dotenv');
-// const userRoutes = require('./routes/userRoutes');
-// const authRoutes = require('./routes/authRoutes');
-// const productRoutes = require('./routes/productRoutes');
-// const cartRoutes = require('./routes/cartRoutes');
-// const orderRoutes = require('./routes/orderRoutes');
-// const stripeRoutes = require('./routes/stripe');
-// const cors = require('cors')
-// const AppError = require('./util/appError')
-// const globalErrorHandler = require('./controllers/errorController');
-// dotenv.config(
-//     {
-//         path :'./.env'
-//     }
-// );
+const morgan = require('morgan');
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+const userRoutes = require('./routes/userRoutes');
+const authRoutes = require('./routes/authRoutes');
+const productRoutes = require('./routes/productRoutes');
+const cartRoutes = require('./routes/cartRoutes');
+const orderRoutes = require('./routes/orderRoutes');
+const stripeRoutes = require('./routes/stripe');
+const cors = require('cors')
+const AppError = require('./util/appError')
+const globalErrorHandler = require('./controllers/errorController');
+dotenv.config(
+    {
+        path :'./.env'
+    }
+);
 
 const app = express();
 // app.use(express.static('public'));
@@ -42,15 +42,15 @@ const app = express();
 //   app.use(globalErrorHandler)
 
 
-// const DATABASE = process.env.DATABASE_URL.replace('<password>',process.env.DATABASE_PASSWORD);
-
-// mongoose.connect(DATABASE).then(()=>{
-//     console.log('Connected to database');
-// }).catch(err => console(err));
-
 app.get('/api/product',(req,res)=>{
   res.send('hellooooo')
 })
+const DATABASE = process.env.DATABASE_URL.replace('<password>',process.env.DATABASE_PASSWORD);
+
+mongoose.connect(DATABASE).then(()=>{
+    console.log('Connected to database');
+}).catch(err => console(err));
+
 
 
 module.exports = app;
