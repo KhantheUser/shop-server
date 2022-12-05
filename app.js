@@ -29,12 +29,6 @@ if (process.env.NODE_ENV === 'development') {
   }
 
 app.use(cors(corsOptions));
-app.use((req,res,next)=>{
-  res.setHeader('Access-Control-Allow-Origin','*');
-  res.setHeader('Access-Control-Allow-Methods','GET,POST,PUT,PATCH,DELETE');
-  res.setHeader('Access-Control-Allow-Methods','Content-Type','Authorization');
-  next(); 
-})
 app.use('/api/auth',authRoutes)
 app.use('/api/user',userRoutes)
 app.use('/api/product',productRoutes)
@@ -42,6 +36,13 @@ app.use('/api/cart',cartRoutes)
 app.use('/api/order',orderRoutes)
 app.use('/api/checkout',stripeRoutes)
 
+app.use((req,res,next)=>{
+  res.setHeader("Access-Control-Allow-Origin", "*");
+res.setHeader("Access-Control-Allow-Credentials", "true");
+res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+  next(); 
+})
 
 
 
